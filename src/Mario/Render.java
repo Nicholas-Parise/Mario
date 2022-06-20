@@ -4,8 +4,7 @@ import java.awt.*;
 import javax.swing.*;
 
 /***************************
- * Nicholas Parise, 
- * Sile Keenan, 
+ * Nicholas Parise,
  * ICS4U, 
  * Tetris
  ****************************/
@@ -50,12 +49,14 @@ public class Render extends JPanel {
  public Mouse mouse;
 
  Mario mario;
+ Level level;
 
  // ----------------------------
 
  public Render(Mario m){
 
   mario = m;
+  level = m.level;
 
   frame = new JFrame();
   keyboard = new KeyBoard(mario);
@@ -135,8 +136,7 @@ public class Render extends JPanel {
 
 
 
-  g.setColor(colors[4]);
-  g.fillRect( mario.player.getX(),  mario.player.getY(),  mario.player.getHitBoxX(), mario.player.getHitBoxY());
+
 
    int[][] arr = {
           {1,1,1,1,1,1},
@@ -146,7 +146,21 @@ public class Render extends JPanel {
           {1,0,0,0,0,1},
           {1,1,1,1,1,1}};
 
-  ArrayBuilder(g, 30, 50, 50, 2, -1, -1, arr);
+//  ArrayBuilder(g, 10, 10, 50, 2, -1, -1, arr);
+
+  g.setColor(colors[7]);
+  for (int i = 0; i < level.entArr.length; i++) {
+   for (int j = 0; j < level.entArr[0].length; j++) {
+
+    if(level.entArr[i][j] != null) {
+     g.fillRect(level.entArr[i][j].getX()-25, level.entArr[i][j].getY()-25, level.entArr[i][j].getHitBoxX(), level.entArr[i][j].getHitBoxY());
+    }
+   }}
+
+
+
+  g.setColor(colors[8]);
+  g.fillRect( mario.player.getX()-5,  mario.player.getY()-10,  mario.player.getHitBoxX(), mario.player.getHitBoxY());
 
  // int[][] test =  mario.level.arr;
 

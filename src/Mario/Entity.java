@@ -20,6 +20,11 @@ public class Entity {
 
     int time;
 
+    double gravity;
+
+    private double gravitySpeed;
+
+
     //    +
     // - -|- +
     //    -
@@ -33,13 +38,16 @@ public class Entity {
         hitX = xbox;
         hitY = ybox;
 
-        coef = 0.1;
+        coef = 0.20;
 
         ySpeed = 0;
         xSpeed = 0;
         direction = 0;
         magnitude = 0;
-        onGround = true;
+        onGround = false;
+
+        gravity = 0.1;
+        gravitySpeed = 0;
     }
 
     public Entity(int xbox,int ybox){
@@ -74,6 +82,10 @@ public class Entity {
         return magnitude;
     }
 
+    public void setOnGround(boolean x){
+        onGround = x;
+    }
+
     public void setX(int xx){
         x = xx; }
 
@@ -87,6 +99,18 @@ public class Entity {
     public void setSpeedY(double yy){
         ySpeed = yy;
     }
+
+    public void moveRight(){
+        setSpeedX(5.0);
+    }
+
+    public void moveleft(){
+        setSpeedX(-5.0);
+    }
+
+    public void runRight(){setSpeedX(10.0);}
+
+    public void runLeft(){setSpeedX(-10.0);}
 
     public void CalculateDirection() {
 
@@ -116,14 +140,23 @@ public class Entity {
 
     public void jump(){
         setSpeedY(10);
+        gravitySpeed = 0;
         onGround = false;
     }
 
     public void gravity(){
 
         if(!onGround) {
-            setSpeedY(getSpeedY() - 0.1);
+
+            if(getSpeedY() <= -10){
+                setSpeedY(-10);
+            }else{
+                gravitySpeed += gravity;
+                setSpeedY(getSpeedY() - gravitySpeed);
+            }
+
         }else{
+            gravitySpeed = 0;
             setSpeedY(0);
         }
     }
@@ -148,19 +181,10 @@ public class Entity {
         }else{
             time +=delta;
         }
-
-
     }
 
 
 
-    public void moveRight(){
-        setSpeedX(5.0);
-    }
-
-    public void moveleft(){
-        setSpeedX(-5.0);
-    }
 
 
     public boolean collision(Entity e){
@@ -181,8 +205,6 @@ public class Entity {
         }
         return false;
     }
-
-
 
 
 }

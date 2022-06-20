@@ -67,21 +67,6 @@ Mario mario;
 
 	public void keyTyped(KeyEvent e) {
 
-		int keyCode = e.getKeyCode();
-
-		if (keyCode == KeyEvent.VK_LEFT) {
-			// left arrow key
-			mario.player.moveleft();
-		} else if (keyCode == KeyEvent.VK_RIGHT) {
-			// right arrow key
-			mario.player.moveRight();
-		} else if (keyCode == KeyEvent.VK_UP) {
-			// up arrow key
-			mario.player.jump();
-		} else if (keyCode == KeyEvent.VK_DOWN) {
-			// down arrow key
-
-		}
 	}
 
 	// this funtion is necessary to stop run time error but is unused
